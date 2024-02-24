@@ -1,0 +1,225 @@
+Certainly! You can customize the background colors to enhance the visual appeal. Below is the updated HTML code with added background colors for the header, pricing boxes, and interactive toggles:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechTool Pro Pricing</title>
+    <style>
+        /* Common styles for all screen sizes */
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .pricing-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 20px auto;
+        }
+
+        .plan-box {
+            flex: 1;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 0 10px;
+            padding: 20px;
+            background-color: #fff;
+        }
+
+        h2 {
+            color: #007bff;
+        }
+
+        h3 {
+            color: #333;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        /* Styling for interactive toggles */
+        .toggle-box {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #fff;
+        }
+
+        /* Responsive design for smaller screens */
+        @media only screen and (max-width: 600px) {
+            .pricing-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>TechTool Pro Pricing</h1>
+    </header>
+
+    <div class="pricing-container">
+        <div class="plan-box" id="basicPlan">
+            <h2>Basic</h2>
+            <ul>
+                <li><strong id="basicPrice">Price:</strong> $49.99/month</li>
+                <li><strong>Features:</strong>
+                    <ul>
+                        <li id="basicDevices">10 Devices</li>
+                        <li>Email Support</li>
+                        <li>Basic Monitoring</li>
+                    </ul>
+                </li>
+            </ul>
+            <button onclick="selectPlan('basic')">Select Basic Plan</button>
+        </div>
+
+        <div class="plan-box" id="standardPlan">
+            <h2>Standard</h2>
+            <ul>
+                <li><strong id="standardPrice">Price:</strong> $99.99/month</li>
+                <li><strong>Features:</strong>
+                    <ul>
+                        <li id="standardDevices">50 Devices</li>
+                        <li>Email & Phone Support</li>
+                        <li>Advanced Monitoring</li>
+                        <li>Custom Reports</li>
+                    </ul>
+                </li>
+            </ul>
+            <button onclick="selectPlan('standard')">Select Standard Plan</button>
+        </div>
+
+        <div class="plan-box" id="premiumPlan">
+            <h2>Premium</h2>
+            <ul>
+                <li><strong id="premiumPrice">Price:</strong> $199.99/month</li>
+                <li><strong>Features:</strong>
+                    <ul>
+                        <li id="premiumDevices">Unlimited Devices</li>
+                        <li>24/7 Support</li>
+                        <li>Advanced Monitoring with AI Alerts</li>
+                        <li>Custom Reports & Dashboard</li>
+                        <li>Priority Access to Updates</li>
+                    </ul>
+                </li>
+            </ul>
+            <button onclick="selectPlan('premium')">Select Premium Plan</button>
+        </div>
+    </div>
+
+    <div class="plan-box" id="selectedPlan" style="display: none;">
+        <h2>Selected Plan</h2>
+        <p id="selectedPlanDetails"></p>
+    </div>
+
+    <div class="toggle-box">
+        <h2>Interactive Pricing Toggles</h2>
+        <div>
+            <label for="currencyToggle">Currency</label>
+            <select id="currencyToggle" onchange="updatePricing()">
+                <option value="USD">USD ($)</option>
+                <option value="EUR">EUR (€)</option>
+                <option value="GBP">GBP (£)</option>
+            </select>
+        </div>
+        <div>
+            <label for="measurementToggle">Measurement Units</label>
+            <select id="measurementToggle" onchange="updatePricing()">
+                <option value="Devices">Devices</option>
+                <option value="Endpoints">Endpoints</option>
+                <option value="Nodes">Nodes</option>
+            </select>
+        </div>
+    </div>
+
+    <section>
+        <h2>Responsive Design</h2>
+        <p>Our pricing page is designed to offer a seamless experience across all devices, including desktops, tablets, and smartphones. Whether you're viewing it on a large monitor or a small phone screen, you'll have no trouble exploring our pricing options and customizing your preferences.</p>
+    </section>
+
+    <script>
+        function updatePricing() {
+            const currency = document.getElementById("currencyToggle").value;
+            const measurementUnit = document.getElementById("measurementToggle").value;
+
+            // Update Basic Plan
+            document.getElementById("basicPrice").innerText = `Price: ${getFormattedPrice(49.99, currency)}/month`;
+            document.getElementById("basicDevices").innerText = `10 ${measurementUnit}`;
+
+            // Update Standard Plan
+            document.getElementById("standardPrice").innerText = `Price: ${getFormattedPrice(99.99, currency)}/month`;
+            document.getElementById("standardDevices").innerText = `50 ${measurementUnit}`;
+
+            // Update Premium Plan
+            document.getElementById("premiumPrice").innerText = `Price: ${getFormattedPrice(199.99, currency)}/month`;
+            document.getElementById("premiumDevices").innerText = `Unlimited ${measurementUnit}`;
+        }
+
+        function getFormattedPrice(price, currency) {
+            return new Intl.NumberFormat('en-US', { style: 'currency', currency }).format(price);
+        }
+
+        function selectPlan(plan) {
+            document.getElementById("selectedPlanDetails").innerText = `You have selected the ${plan} plan
+
+.`;
+            document.getElementById("selectedPlan").style.display = "block";
+        }
+
+        // Initial update when the page loads
+        updatePricing();
+    </script>
+
+</body>
+</html>
+```
+
+In this version, I added background colors to the header, pricing boxes, and interactive toggle box to improve the overall visual appeal. You can customize these colors further based on your design preferences.
